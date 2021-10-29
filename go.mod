@@ -1,3 +1,3 @@
-module github.com/date
+module github.com/MaxwelMazur/date
 
 go 1.16
