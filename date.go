@@ -6,19 +6,7 @@ import (
 	"time"
 )
 
-type Date interface {
-	timeNowDB() (string, string)
-	timeNowBR() (string, string)
-	formatDate() (string, string)
-	addDaysDateBR(string, int) (string, string)
-	removeDaysDateBR(string, int) (string, string)
-	week(int) string
-	month(int) string
-	weekBR(int) string
-	monthBR(int) string
-}
-
-func formatDate(t time.Time, format string) (string, string) {
+func FormatDate(t time.Time, format string) (string, string) {
 	mask := "02/01/2006"
 	if strings.ToUpper(format) == "DB" {
 		mask = "2006-01-02"
@@ -28,34 +16,34 @@ func formatDate(t time.Time, format string) (string, string) {
 	return date, time
 }
 
-func timeNowDB() (string, string) {
-	return formatDate(time.Now(), "DB")
+func TimeNowDB() (string, string) {
+	return FormatDate(time.Now(), "DB")
 }
 
-func timeNowBR() (string, string) {
-	return formatDate(time.Now(), "BR")
+func TimeNowBR() (string, string) {
+	return FormatDate(time.Now(), "BR")
 }
 
-func addDaysDateBR(dateInit string, numberDays int) (string, string) {
+func AddDaysDateBR(dateInit string, numberDays int) (string, string) {
 	mask := "02/01/2006"
 	t, err := time.Parse(mask, dateInit)
 	if err != nil {
 		log.Println("Error addDaysDateBR", err)
 		return "", ""
 	}
-	return formatDate(t, "BR")
+	return FormatDate(t, "BR")
 }
 
-func removeDaysDateBR(dateBR string, numberDays int) (string, string) {
+func RemoveDaysDateBR(dateBR string, numberDays int) (string, string) {
 	mask := "02/01/2006"
 	t, err := time.Parse(mask, dateBR)
 	if err != nil {
 		log.Println("Error removeDaysDateBR", err)
 	}
-	return formatDate(t, "BR")
+	return FormatDate(t, "BR")
 }
 
-func week(week int) (dayWeek string) {
+func Week(week int) (dayWeek string) {
 	switch week {
 	case 0:
 		dayWeek = "Sunday"
@@ -77,7 +65,7 @@ func week(week int) (dayWeek string) {
 	return dayWeek
 }
 
-func month(month int) (dayMonth string) {
+func Month(month int) (dayMonth string) {
 	switch month {
 	case 1:
 		dayMonth = "January"
@@ -109,7 +97,7 @@ func month(month int) (dayMonth string) {
 	return dayMonth
 }
 
-func weekBR(week int) (dayWeek string) {
+func WeekBR(week int) (dayWeek string) {
 	switch week {
 	case 0:
 		dayWeek = "Domingo"
@@ -131,7 +119,7 @@ func weekBR(week int) (dayWeek string) {
 	return dayWeek
 }
 
-func monthBR(month int) (dayMonth string) {
+func MonthBR(month int) (dayMonth string) {
 	switch month {
 	case 1:
 		dayMonth = "Janeiro"
