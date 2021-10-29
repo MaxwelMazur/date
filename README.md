@@ -1,7 +1,7 @@
 # Date
 
 ```
-> go get github.com/MaxwelMazur/date
+go get github.com/MaxwelMazur/date
 ``` 
 
 Copyright <YEAR> <COPYRIGHT HOLDER>
