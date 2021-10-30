@@ -43,6 +43,18 @@ func RemoveDaysDateBR(dateBR string, numberDays int) (string, string) {
 	return FormatDate(t, "BR")
 }
 
+func IsTimeSpan(start, end, check time.Time) bool {
+	return check.After(start) && check.Before(end)
+}
+
+func ThisTimeIsAfter(date time.Time) bool {
+	return date.After(date)
+}
+
+func ThisTimeIsBefore(date time.Time) bool {
+	return date.Before(date)
+}
+
 func Week(week int) (dayWeek string) {
 	switch week {
 	case 0:
