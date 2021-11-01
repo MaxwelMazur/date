@@ -55,6 +55,77 @@ func ThisTimeIsBefore(date time.Time) bool {
 	return date.Before(date)
 }
 
+func ParseDate(date string) (time.Time, bool) {
+	mask := "2006-01-02"
+	if len(date) > 10 {
+		mask = "2006-01-02 15:04:05"
+	}
+
+	if strings.Index(date, "-") < 1 {
+		mask = "02/01/2006"
+		if len(date) > 10 {
+			mask = "02/01/2006 15:04:05"
+		}
+	}
+
+	time, err := time.Parse(mask, date)
+	if err != nil {
+		return time, false
+	}
+	return time, true
+}
+
+func IsDateEqual(dateInitial, dateFinal string) bool {
+	dateInitialConverted, right := ParseDate(dateInitial)
+	if right == false {
+		return false
+	}
+
+	dateFinalConverted, right := ParseDate(dateFinal)
+	if right == false {
+		return false
+	}
+
+	if dateInitialConverted.Equal(dateFinalConverted) {
+		return true
+	}
+	return false
+}
+
+func IsDateLonger(dateInitial, dateFinal string) bool {
+	dateInitialConverted, right := ParseDate(dateInitial)
+	if right == false {
+		return false
+	}
+
+	dateFinalConverted, right := ParseDate(dateFinal)
+	if right == false {
+		return false
+	}
+
+	if dateInitialConverted.After(dateFinalConverted) {
+		return true
+	}
+	return false
+}
+
+func IsDateShorter(dateInitial, dateFinal string) bool {
+	dateInitialConverted, right := ParseDate(dateFinal)
+	if right == false {
+		return false
+	}
+
+	dateFinalConverted, right := ParseDate(dateFinal)
+	if right == false {
+		return false
+	}
+
+	if dateInitialConverted.Before(dateFinalConverted) {
+		return true
+	}
+	return false
+}
+
 func Week(week int) (dayWeek string) {
 	switch week {
 	case 0:
